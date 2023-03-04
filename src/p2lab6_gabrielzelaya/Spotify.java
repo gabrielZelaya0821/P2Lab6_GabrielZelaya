@@ -588,19 +588,38 @@ public class Spotify extends javax.swing.JFrame {
 
     private void btn_crearLanzamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crearLanzamientoMouseClicked
         DefaultListModel modelo = (DefaultListModel) lista_cancionesAlbum.getModel();
+        
         if(modelo.getSize() > 0){
             ArrayList<Cancion> canciones = new ArrayList<>();
             for (int i = 0; i < modelo.getSize(); i++) {
                 canciones.add( (Cancion) modelo.getElementAt(i));
             }
             Album album = new Album(canciones, tf_title.getText(),escogerFecha.getDate());
+            lanzamientos.add(album);
+            agregarArbol(album);
         }else{
             Lanzamiento lanzamiento = new Lanzamiento(tf_title.getText(), escogerFecha.getDate());
             lanzamientos.add(lanzamiento);
+            agregarArbol(lanzamiento);
         }
     }//GEN-LAST:event_btn_crearLanzamientoMouseClicked
 
-    public void escribirArchivo(String contenido) {
+    private void agregarArbol(Lanzamiento lanzamiento){
+        DefaultTreeModel modelo = (DefaultTreeModel) tree_lanzamientos.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
+        DefaultMutableTreeNode node;
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            if(raiz.getChildAt(i).toString().equals("Albums")){
+                node = new DefaultMutableTreeNode(lanzamiento);
+            }else{
+                node = new DefaultMutableTreeNode(lanzamiento);
+            }
+            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(node);
+        }
+    }
+    
+    
+    private void escribirArchivo(String contenido) {
         try {
             PrintWriter salida = new PrintWriter(new FileWriter(usuariosFile, true));
             salida.println(contenido);
