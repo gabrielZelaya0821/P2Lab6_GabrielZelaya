@@ -81,6 +81,7 @@ public class Spotify extends javax.swing.JFrame {
         btn_agregarCancion = new javax.swing.JButton();
         btn_eliminarCancion = new javax.swing.JButton();
         btn_crearLanzamiento = new javax.swing.JButton();
+        bg_crearCancion = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Spotify");
@@ -378,6 +379,11 @@ public class Spotify extends javax.swing.JFrame {
         jScrollPane4.setViewportView(lista_cancionesAlbum);
 
         btn_agregarCancion.setText("Agregar");
+        btn_agregarCancion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_agregarCancionMouseClicked(evt);
+            }
+        });
 
         btn_eliminarCancion.setText("Eliminar");
 
@@ -449,6 +455,19 @@ public class Spotify extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        bg_crearCancion.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout bg_crearCancionLayout = new javax.swing.GroupLayout(bg_crearCancion);
+        bg_crearCancion.setLayout(bg_crearCancionLayout);
+        bg_crearCancionLayout.setHorizontalGroup(
+            bg_crearCancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        bg_crearCancionLayout.setVerticalGroup(
+            bg_crearCancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -473,6 +492,11 @@ public class Spotify extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(bg_crearLanzamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bg_crearCancion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -499,6 +523,11 @@ public class Spotify extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(bg_crearLanzamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bg_crearCancion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -602,19 +631,31 @@ public class Spotify extends javax.swing.JFrame {
             lanzamientos.add(lanzamiento);
             agregarArbol(lanzamiento);
         }
+        bg_crearLanzamiento.setVisible(false);
+        bg_artista.setVisible(true);
     }//GEN-LAST:event_btn_crearLanzamientoMouseClicked
+
+    private void btn_agregarCancionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarCancionMouseClicked
+        
+    }//GEN-LAST:event_btn_agregarCancionMouseClicked
 
     private void agregarArbol(Lanzamiento lanzamiento){
         DefaultTreeModel modelo = (DefaultTreeModel) tree_lanzamientos.getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
         DefaultMutableTreeNode node;
+        String[] datos = lanzamiento.toString().split("\\|");
+
         for (int i = 0; i < raiz.getChildCount(); i++) {
-            if(raiz.getChildAt(i).toString().equals("Albums")){
+            if (raiz.getChildAt(i).toString().
+                        equals("Albums")) {
+                if(lanzamiento instanceof Album){
                 node = new DefaultMutableTreeNode(lanzamiento);
-            }else{
+                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(node);
+                }
+            }else if(datos.length == 2){
                 node = new DefaultMutableTreeNode(lanzamiento);
+                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(node);
             }
-            ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(node);
         }
     }
     
@@ -658,20 +699,31 @@ public class Spotify extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg_artista;
+    private javax.swing.JPanel bg_crearCancion;
     private javax.swing.JPanel bg_crearLanzamiento;
+    private javax.swing.JPanel bg_crearLanzamiento1;
+    private javax.swing.JPanel bg_crearLanzamiento2;
     private javax.swing.JPanel bg_login;
     private javax.swing.JPanel bg_oyente;
     private javax.swing.JPanel bg_singup;
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_agregarCancion;
+    private javax.swing.JButton btn_agregarCancion1;
+    private javax.swing.JButton btn_agregarCancion2;
     private javax.swing.JButton btn_crearLanzamiento;
+    private javax.swing.JButton btn_crearLanzamiento1;
+    private javax.swing.JButton btn_crearLanzamiento2;
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_eliminarCancion;
+    private javax.swing.JButton btn_eliminarCancion1;
+    private javax.swing.JButton btn_eliminarCancion2;
     private javax.swing.JButton btn_login;
     private javax.swing.JButton btn_signup;
     private javax.swing.JComboBox<String> cb_tipoUsuario;
     private javax.swing.JSpinner edadSpinner;
     private com.toedter.calendar.JDateChooser escogerFecha;
+    private com.toedter.calendar.JDateChooser escogerFecha1;
+    private com.toedter.calendar.JDateChooser escogerFecha2;
     private javax.swing.JPasswordField ff_password;
     private javax.swing.JPasswordField ff_password2;
     private javax.swing.JLabel img_spotify;
@@ -680,22 +732,34 @@ public class Spotify extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JList<String> likedSongs;
     private javax.swing.JList<String> lista_cancionesAlbum;
+    private javax.swing.JList<String> lista_cancionesAlbum1;
+    private javax.swing.JList<String> lista_cancionesAlbum2;
     private javax.swing.JList<String> playlist;
     private javax.swing.JTextField tf_title;
+    private javax.swing.JTextField tf_title1;
+    private javax.swing.JTextField tf_title2;
     private javax.swing.JTextField tf_username;
     private javax.swing.JTextField tf_username2;
     private javax.swing.JTree tree_lanzamientos;
     private javax.swing.JLabel txt_age;
     private javax.swing.JLabel txt_canciones;
+    private javax.swing.JLabel txt_canciones1;
+    private javax.swing.JLabel txt_canciones2;
     private javax.swing.JLabel txt_fecha;
+    private javax.swing.JLabel txt_fecha1;
+    private javax.swing.JLabel txt_fecha2;
     private javax.swing.JLabel txt_likedSongs;
     private javax.swing.JLabel txt_password;
     private javax.swing.JLabel txt_password2;
     private javax.swing.JLabel txt_playlists;
     private javax.swing.JLabel txt_signUp;
     private javax.swing.JLabel txt_title;
+    private javax.swing.JLabel txt_title1;
+    private javax.swing.JLabel txt_title2;
     private javax.swing.JLabel txt_username;
     private javax.swing.JLabel txt_username2;
     // End of variables declaration//GEN-END:variables
